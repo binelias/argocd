@@ -1,0 +1,14 @@
+# my-app-preview-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-preview
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    # This selector will also be updated by Argo Rollouts
+    app: my-app
+  
