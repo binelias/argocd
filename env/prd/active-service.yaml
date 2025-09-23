@@ -1,0 +1,13 @@
+# my-app-active-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-active
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    # This selector will be updated by Argo Rollouts
+    app: my-app
