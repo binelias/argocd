@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-stg
+  namespace: argocd
+  annotations:
+  # These annotations configure Argo CD Image Updater for automated image updates.
+  # - image-list: The tag X means the image updater will update the image to the latest version.
+  # - write-back-method: Defines how updates are written back (git in this case).
+  # - pull-secret: References the Kubernetes secret for pulling images from DockerHub.
+    argocd-image-updater.argoproj.io/image-list: eliasrayan/nginx-demo:X
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/pull-secret: argocd:dockerhub-credentials
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:rayanBinElias/argocd-grasys-blog.git
+    targetRevision: stg
+    path: env/stg
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: stg
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - Validate=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: false
