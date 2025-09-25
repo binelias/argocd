@@ -2,24 +2,26 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: my-app-rollout
+  namespace: prd
 spec:
   replicas: 2
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: my-app
+      app: my-app-rollout
   template:
     metadata:
       labels:
-        app: my-app
+        app: my-app-rollout
     spec:
       containers:
-      - name: myapp-rollout
-        image: eliasrayan/nginx-demo:1.0.0
+      - name: my-app-rollout
+        image: argoproj/rollouts-demo:blue
+        imagePullPolicy: Always
         ports:
-        - containerPort: 80
-
+        - containerPort: 8080
   strategy:
-    blueGreen:
+    blueGreen: 
       # activeService specifies the service to update with the new template hash at time of promotion.
       # This field is mandatory for the blueGreen update strategy.
       activeService: my-app-active
