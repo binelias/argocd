@@ -8,13 +8,13 @@ metadata:
   # - image-list: The tag X means the image updater will update the image to the latest version.
   # - write-back-method: Defines how updates are written back (git in this case).
   # - pull-secret: References the Kubernetes secret for pulling images from DockerHub.
-    argocd-image-updater.argoproj.io/image-list: eliasrayan/nginx-demo:X
+    argocd-image-updater.argoproj.io/image-list: <docker-hub-url>/nginx-demo:X
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/pull-secret: argocd:dockerhub-credentials
 spec:
   project: default
   source:
-    repoURL: git@github.com:rayanBinElias/argocd-grasys-blog.git
+    repoURL: git@github.com:<docker-hub-url>
     targetRevision: stg
     path: env/stg
   destination: 
