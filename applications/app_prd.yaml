@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:rayanBinElias/argocd-grasys-blog.git
+    repoURL: git@github.com:<github-url>
     targetRevision: stg
     # path: env/stg
     path: env/prd
