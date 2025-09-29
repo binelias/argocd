@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: eliasrayan/nginx-demo:1.0.0
+        image: <docker-hub-url>/nginx-demo:1.0.0
         ports:
         - containerPort: 80
 
